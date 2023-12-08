@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="mt-3 container">
+    <div class="display-4 m-2">ドラクエクイズ1.0ver</div>
+    <div id="js-question" class="alert alert-primary" role="alert">
+      A simple primary alert—check it out!
+    </div>
+    <div class="d-flex justify-content-center">
+
+      <button type="button" class="btn btn-primary quiz-button">Primary</button>
+      <button type="button" class="ms-1 btn btn-primary quiz-button">Primary</button>
+      <button type="button" class="ms-1 btn btn-primary quiz-button">Primary</button>
+      <button type="button" class="ms-1 btn btn-primary quiz-button">Primary</button>
+    </div>
+
+  </div>
+
+  <!-- アンケート -->
+  <!-- 名前 -->
+  <div class="mt-3 container" id="survey-form">
+    <form
+      action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfn0HD_Lqz3n1KD-i1CTvdnqVgKiS1jucLXDcOyizcb6Bkzxg/formResponse"
+      id="from">
+      <div class="alert alert-secondary" role="alert">JavaScriptのクイズアンケート</div>
+      <div class="form-name my-5">
+        <label for="" class="form-label">[1].お名前（匿名でも構いません）</label>
+        <input type="text" class="form-control" id="name" placeholder="みちてる" name="entry.1784880576" required>
+      </div>
+
+
+      <!-- 正解数 -->
+      <div class="form-radio my-5">
+        <label for="" class="form-label">[2].何問正解できましたか？</label>
+        <div class="form-check d-flex align-items-center">
+          <input type="radio" name="entry.1799182697" value="０～４問正解" required>
+          <p class="m-0">０～４問正解</p>
+        </div>
+        <div class="form-check d-flex align-items-center">
+          <input type="radio" name="entry.1799182697" value="５～７問正解">
+          <p class="m-0">５～７問正解</p>
+        </div>
+        <div class="form-check d-flex align-items-center">
+          <input type="radio" name="entry.1799182697" value="８～９問正解">
+          <p class="m-0">８～９問正解</p>
+        </div>
+        <div class="form-check d-flex align-items-center">
+          <input type="radio" name="entry.1799182697" value="全問正解">
+          <p class="m-0">全問正解</p>
+        </div>
+      </div>
+      <div class="from-textarea my-5">
+        <label for="" class="form-label">[3].もしよければ感想を頂けると幸いです</label>
+        <textarea class="form-control" id="message" rows="3" name="entry.1547985899" placeholder="難しかったなど"
+          required></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-secondary">送信</button>
+    </form>
+    <p class="end-message">アンケートありがとうございました</p>
+    <p class="false-message">送信失敗です</p>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+  <script>
+    $(document).ready(function () {
+
+      $('#form').submit(function (event) {
+        var formData = $('#form').serialize();
+        $.ajax({
+          url: "https://docs.google.com/forms/d/e/1FAIpQLSfn0HD_Lqz3n1KD-i1CTvdnqVgKiS1jucLXDcOyizcb6Bkzxg/viewform",
+          data: formData,
+          type: "POST",
+          dataType: "xml",
+          statusCode: {
+            0: function () {
+              $(".end-message").slideDown();
+              $(".submit-btn").fadeOut();
+              //window.location.href = "thanks.html";
+            },
+            200: function () {
+              $(".false-message").slideDown();
+            }
+          }
+        });
+        event.preventDefault();
+      });
+
+    });</script>
+  <!--  -->
+  <script src="script.js"></script>
+
+
+  <script src="https://replit.com/public/js/replit-badge-v2.js" theme="dark" position="bottom-right"></script>
+
+</body>
+
+</html>
